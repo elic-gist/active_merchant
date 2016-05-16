@@ -20,7 +20,8 @@ module ActiveMerchant #:nodoc:
         refund_check: "ProcessACHEFTRefundWithTransactionIdV1",
         store: "CreateCreditCardCustomerCodeV1",
         store_check: "CreateACHEFTCustomerCodeV1",
-        unstore: "DeleteCustomerCodeV1"
+        unstore: "DeleteCustomerCodeV1",
+        lookup: "GetCustomerCodeDetailV1"
       }
 
       def initialize(options={})
@@ -85,6 +86,14 @@ module ActiveMerchant #:nodoc:
         add_ip(post, options)
 
         commit(:unstore, post)
+      end
+
+      def unstore(authorization, options = {})
+        post = {}
+        post[:customer_code] = authorization
+        add_ip(post, options)
+
+        commit(:lookup, post)
       end
 
       private
@@ -183,7 +192,8 @@ module ActiveMerchant #:nodoc:
           refund_check: "ProcessLink.asmx",
           store: "CustomerLink.asmx",
           store_check: "CustomerLink.asmx",
-          unstore: "CustomerLink.asmx"
+          unstore: "CustomerLink.asmx",
+          lookup: "CustomerLink.asmx"
         }
       end
 
