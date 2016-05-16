@@ -21,7 +21,7 @@ module ActiveMerchant #:nodoc:
         store: "CreateCreditCardCustomerCodeV1",
         store_check: "CreateACHEFTCustomerCodeV1",
         unstore: "DeleteCustomerCodeV1",
-        lookup: "GetCustomerCodeDetailV1"
+        retrieve: "GetCustomerCodeDetailV1"
       }
 
       def initialize(options={})
@@ -88,12 +88,13 @@ module ActiveMerchant #:nodoc:
         commit(:unstore, post)
       end
 
-      def unstore(authorization, options = {})
+      def retrieve(authorization, options = {})
         post = {}
         post[:customer_code] = authorization
+
         add_ip(post, options)
 
-        commit(:lookup, post)
+        commit(:retrieve, post)
       end
 
       private
@@ -175,6 +176,8 @@ module ActiveMerchant #:nodoc:
         response = parse(ssl_post(url(action), post_data(action, parameters),
          { 'Content-Type' => 'application/soap+xml; charset=utf-8'}))
 
+        response[:authorization_result] = "OK" if response[:status] == "Success" and response[:error] == nil
+
         Response.new(
           success_from(response),
           message_from(response),
@@ -193,7 +196,7 @@ module ActiveMerchant #:nodoc:
           store: "CustomerLink.asmx",
           store_check: "CustomerLink.asmx",
           unstore: "CustomerLink.asmx",
-          lookup: "CustomerLink.asmx"
+          retrieve: "CustomerLink.asmx"
         }
       end
 
