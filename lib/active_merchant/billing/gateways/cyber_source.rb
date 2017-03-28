@@ -66,7 +66,7 @@ module ActiveMerchant #:nodoc:
           :r205 => "CREDIT CARD NOT AUTHORIZED: Stolen or lost card.",
           :r207 => "TRANSACTION NOT AUTHORIZED: Issuing bank unavailable. Please contact your financial institution and try again later.",
           :r208 => "CREDIT CARD NOT AUTHORIZED: Inactive card or card not authorized for card-not-present transactions",
-          :r209 => "CREDIT CARD NOT AUTHORIZED: American Express Card Identifiction Digits (CID) did not match",
+          :r209 => "CREDIT CARD NOT AUTHORIZED: American Express Card Identification Digits (CID) did not match",
           :r210 => "CREDIT CARD NOT AUTHORIZED: The card has reached the credit limit. Please try a different method of payment.",
           :r211 => "CREDIT CARD NOT AUTHORIZED: Invalid card verification number. Please re-enter your credit card information.",
           :r221 => "TRANSACTION CANNOT BE PROCESSED: Please email helpdesk@elic.org and provide the following information: The customer matched an entry on the processor's negative file",
